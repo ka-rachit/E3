@@ -1,0 +1,159 @@
+{
+  "experiment": "Unified ERASE + SISA Holistic Cost (Operator-Level FLOPs, 50%-subject unlearning)",
+  "paper_erase": "Muresanu et al., ICML 2025",
+  "paper_sisa": "Bourtoule et al., 2021",
+  "model": "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+  "dataset": "jinzhuoran/RWKU",
+  "knowledge_base_size": 12798,
+  "evaluation_queries": 3268,
+  "unique_subjects": 200,
+  "subjects_forgotten_50pct": 100,
+  "unlearning_requests_per_erase_variant": 100,
+  "n_profile_steps": 5,
+  "max_seq_length": 128,
+  "profiler": "torch.utils.flop_counter.FlopCounterMode",
+  "profiling": {
+    "avg_train_step_flops": 989318881280.0,
+    "train_step_flops_all": [
+      989318881280,
+      989318881280,
+      989318881280,
+      989318881280,
+      989318881280
+    ]
+  },
+  "sisa_variants": {
+    "1-SISA": {
+      "n_shards": 1,
+      "shard_size": 12798,
+      "shard_training_flops": 1.266130304262144e+16,
+      "U_flops": 9495977281966080.0,
+      "I_flops": 47678670272.0,
+      "single_inference_flops": 47678670272.0,
+      "total_steps_per_shard": 12798.0
+    },
+    "2-SISA": {
+      "n_shards": 2,
+      "shard_size": 6399,
+      "shard_training_flops": 6330651521310720.0,
+      "U_flops": 4747988640983040.0,
+      "I_flops": 95357340544.0,
+      "single_inference_flops": 47678670272.0,
+      "total_steps_per_shard": 6399.0
+    },
+    "3-SISA": {
+      "n_shards": 3,
+      "shard_size": 4266,
+      "shard_training_flops": 4220434347540480.0,
+      "U_flops": 3165325760655360.0,
+      "I_flops": 143036010816.0,
+      "single_inference_flops": 47678670272.0,
+      "total_steps_per_shard": 4266.0
+    },
+    "4-SISA": {
+      "n_shards": 4,
+      "shard_size": 3200,
+      "shard_training_flops": 3165820420096000.0,
+      "U_flops": 2374365315072000.0,
+      "I_flops": 190714681088.0,
+      "single_inference_flops": 47678670272.0,
+      "total_steps_per_shard": 3200.0
+    }
+  },
+  "erase_variants": {
+    "ERASE-1shot": {
+      "k": 1,
+      "U_mean_flops": 1152.0,
+      "U_total_flops": 115200.0,
+      "U_std_flops": 0.0,
+      "I_mean_flops": 281568694197.76,
+      "prompt_tokens": 148,
+      "n_unlearn_requests": 100,
+      "n_subjects_targeted": 100,
+      "n_skipped": 0,
+      "path_counts": {
+        "FREE": 100,
+        "SWAP": 0,
+        "REFIT": 0
+      },
+      "pct_free": 100.0,
+      "pct_swap": 0.0,
+      "pct_refit": 0.0,
+      "wall_mean_ms": 15.742581720000999,
+      "wall_total_s": 1.5742581720000999
+    },
+    "ERASE-2shot": {
+      "k": 2,
+      "U_mean_flops": 1960154.88,
+      "U_total_flops": 196015488.0,
+      "U_std_flops": 19491832.54855687,
+      "I_mean_flops": 334614533621.76,
+      "prompt_tokens": 173,
+      "n_unlearn_requests": 100,
+      "n_subjects_targeted": 100,
+      "n_skipped": 0,
+      "path_counts": {
+        "FREE": 99,
+        "SWAP": 0,
+        "REFIT": 1
+      },
+      "pct_free": 99.0,
+      "pct_swap": 0.0,
+      "pct_refit": 1.0,
+      "wall_mean_ms": 16.459058469996535,
+      "wall_total_s": 1.6459058469996535
+    },
+    "ERASE-3shot": {
+      "k": 3,
+      "U_mean_flops": 8822211.84,
+      "U_total_flops": 882221184.0,
+      "U_std_flops": 50158871.75193557,
+      "I_mean_flops": 372947031383.04,
+      "prompt_tokens": 191,
+      "n_unlearn_requests": 100,
+      "n_subjects_targeted": 100,
+      "n_skipped": 0,
+      "path_counts": {
+        "FREE": 97,
+        "SWAP": 0,
+        "REFIT": 3
+      },
+      "pct_free": 97.0,
+      "pct_swap": 0.0,
+      "pct_refit": 3.0,
+      "wall_mean_ms": 40.15398433000655,
+      "wall_total_s": 4.015398433000655
+    },
+    "ERASE-4shot": {
+      "k": 4,
+      "U_mean_flops": 3907802.88,
+      "U_total_flops": 390780288.0,
+      "U_std_flops": 38870685.46761522,
+      "I_mean_flops": 1225343141890.56,
+      "prompt_tokens": 578,
+      "n_unlearn_requests": 100,
+      "n_subjects_targeted": 100,
+      "n_skipped": 0,
+      "path_counts": {
+        "FREE": 99,
+        "SWAP": 0,
+        "REFIT": 1
+      },
+      "pct_free": 99.0,
+      "pct_swap": 0.0,
+      "pct_refit": 1.0,
+      "wall_mean_ms": 18.48776140999803,
+      "wall_total_s": 1.848776140999803
+    }
+  },
+  "holistic_costs": {
+    "1-SISA": "inf",
+    "2-SISA": 99583.0759099707,
+    "3-SISA": 66388.71727331381,
+    "4-SISA": 49788.944240448975,
+    "ERASE-1shot": 40600.18089946019,
+    "ERASE-2shot": 33094.42454891329,
+    "ERASE-3shot": 29194.285114936632,
+    "ERASE-4shot": 8063.3979430551935
+  }
+}
